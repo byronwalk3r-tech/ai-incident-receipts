@@ -1,0 +1,1002 @@
+{
+  "name": "The receipts: verified AI failures in production",
+  "description": "Twenty-six documented AI failures in production, each verified against a primary source, out of forty we checked. What they share is not a model or an industry. It is that in almost every case, the company running the AI was the last to know it was failing.",
+  "url": "https://walkeraisystems.com/receipts",
+  "identifier": "https://walkeraisystems.com/receipts",
+  "publisher": "Walker AI Systems LLC",
+  "dataset_schema": "https://walkeraisystems.com/receipts#dataset",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "version": "2026.09.01",
+  "updated": "2026-09-01",
+  "cite_as": "Walker AI Systems LLC (2026). The receipts: verified AI failures in production, version 2026.09.01. https://walkeraisystems.com/receipts",
+  "bibtex": "@misc{walkerai_receipts_20260901,\n  author = {Walker AI Systems LLC},\n  title = {The receipts: verified AI failures in production},\n  year = {2026},\n  version = {2026.09.01},\n  url = {https://walkeraisystems.com/receipts},\n  note = {Licensed CC BY 4.0. Machine-readable at https://walkeraisystems.com/receipts.json}\n}",
+  "mirrors": {
+    "github": "https://github.com/byronwalk3r-tech/ai-incident-receipts"
+  },
+  "count": 26,
+  "method": [
+    "Every entry below is checked against a primary source: a regulator's order, a court record, the company's own statement, or a named newsroom. Incidents that only lived in aggregator blogs were cut. Incidents that are still unresolved allegations were held back. The 26 entries below are the ones where the record is complete and settled enough to publish.",
+    "Across all 40 incidents we verified, at most five were first caught by the organization running the AI: one by a security audit, one by endpoint alerts, one by its own quarterly financials, one in a retrospective review months after the fact, and one by a security team's own monitoring during a controlled test. Customers, readers, journalists, opposing counsel, courts, and regulators found the rest.",
+    "One honest footnote before the list. Publicly documented incidents are a biased sample: a failure a company catches internally rarely makes the news, so the public record overstates external discovery. This page makes no claim about the true base rate. What it shows is what happens when nothing inside the company is watching, because that is the only version of the story the public ever gets to read."
+  ],
+  "fields": {
+    "failure_class": {
+      "silent-wrong-output": "Silent wrong output",
+      "agent-autonomy-exceeded": "Agent exceeded its authority",
+      "sandbox-escape": "Sandbox escape",
+      "prompt-injection-supply-chain": "Prompt injection or supply chain",
+      "data-leak": "Data leak",
+      "unmonitored-accuracy": "Accuracy never monitored",
+      "discriminatory-decision": "Discriminatory decision",
+      "unlawful-data-use": "Unlawful data use",
+      "false-ai-claims": "False claims about the AI",
+      "other": "Other"
+    },
+    "discovered_by": {
+      "deployer-monitoring": "The deployer, through its own monitoring",
+      "deployer-audit": "The deployer, through its own audit or accounts",
+      "deployer-retrospective": "The deployer, in a retrospective review",
+      "victim-security": "The victim organization, not the deployer",
+      "customer": "A customer",
+      "public": "A member of the public",
+      "journalist": "Journalists",
+      "researcher": "Researchers",
+      "advocate": "An advocate or consumer group",
+      "counsel": "Opposing counsel or a claimant",
+      "regulator": "A regulator",
+      "victim": "The party it harmed",
+      "harm-itself": "The harm itself, after the fact"
+    },
+    "caught_by_deployer": "true when discovered_by starts with deployer-: the organization running the AI found the failure first",
+    "verdict": {
+      "CONFIRMED": "the claims held as first researched",
+      "ADJUSTED": "the incident is real and details were corrected against the primary source before publication"
+    }
+  },
+  "groups": [
+    {
+      "id": "g-output",
+      "name": "Output validation",
+      "control": "Rule-based checks that parse what the model produced before a customer sees it. A chatbot with a deterministic pricing floor cannot agree to sell a truck for a dollar, no matter what the prompt says."
+    },
+    {
+      "id": "g-grounding",
+      "name": "Grounded answers",
+      "control": "Answers about policy, price, or law pulled from verified documents at answer time, never generated from the model's memory. A model that is allowed to remember your refund policy will eventually improve it."
+    },
+    {
+      "id": "g-verification",
+      "name": "A human verification step",
+      "control": "A person who reads generated output before it ships, with the specific job of checking claims. Four organizations below skipped it, including two whose entire product is credibility."
+    },
+    {
+      "id": "g-privilege",
+      "name": "Privilege separation",
+      "control": "Permissions enforced by infrastructure, not by instructions. An agent cannot be talked out of an access it does not have, and a policy that is not enforced at the system level is a suggestion."
+    },
+    {
+      "id": "g-monitoring",
+      "name": "Accuracy monitoring in production",
+      "control": "Measuring what the system actually does after launch: error rates, bias, drift against outcomes. Every incident here ran for months or years because the measuring was never built."
+    },
+    {
+      "id": "g-claims",
+      "name": "Honest claims",
+      "control": "The control here is not technical. It is saying only what the system actually does. Regulators have started checking, and the last four receipts are what that looks like."
+    }
+  ],
+  "incidents": [
+    {
+      "slug": "chevrolet-watsonville-one-dollar-tahoe",
+      "url": "https://walkeraisystems.com/receipts/chevrolet-watsonville-one-dollar-tahoe",
+      "title": "Chevrolet of Watsonville: the $1 Tahoe",
+      "group": "g-output",
+      "missing_control": "Output validation",
+      "date_label": "December 2023",
+      "occurred": "2023-12",
+      "resolved": null,
+      "orgs": [
+        "Chevrolet of Watsonville",
+        "Fullpath (chatbot vendor)"
+      ],
+      "failure_class": "prompt-injection-supply-chain",
+      "discovered_by": "public",
+      "caught_by_deployer": false,
+      "found": "Found by a prompt injection posted to X",
+      "summary": "A dealership ran a ChatGPT-powered support bot on its website. A tech entrepreneur injected his own instructions and had it agree to sell a 2024 Tahoe for one dollar as a legally binding offer, in the bot's own words, with no takesies backsies. The post drew roughly 20 million views, copycats swarmed the bot, and the vendor pulled it within days. No car changed hands and the offer had no legal force. The lesson survived anyway: there was nothing between the model and a commitment.",
+      "control": "A deterministic pricing floor between the model and any commitment, so no prompt can make the bot agree to a price a person never set.",
+      "verdict": "ADJUSTED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://venturebeat.com/ai/a-chevy-for-1-car-dealer-chatbots-show-perils-of-ai-for-customer-service",
+          "label": "VentureBeat",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "dpd-chatbot-swore-at-customer",
+      "url": "https://walkeraisystems.com/receipts/dpd-chatbot-swore-at-customer",
+      "title": "DPD: the chatbot that swore at a customer",
+      "group": "g-output",
+      "missing_control": "Output validation",
+      "date_label": "January 2024",
+      "occurred": "2024-01",
+      "resolved": null,
+      "orgs": [
+        "DPD"
+      ],
+      "failure_class": "silent-wrong-output",
+      "discovered_by": "customer",
+      "caught_by_deployer": false,
+      "found": "Found by a customer chasing a parcel",
+      "summary": "A customer trying to find a missing parcel coaxed the delivery firm's support bot into swearing, writing a poem about a useless chatbot, and calling its own company the worst delivery firm in the world. The screenshots drew 800,000 views inside a day. DPD blamed an update deployed the day before and disabled the AI element immediately. An update changed behavior, no test caught it, and a customer ran the regression suite in public.",
+      "control": "A regression test on the customer-facing bot after every update, run before the update ships rather than by a customer in public.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.theguardian.com/technology/2024/jan/20/dpd-ai-chatbot-swears-calls-itself-useless-and-criticises-firm",
+          "label": "The Guardian",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "neda-tessa-helpline-dieting-advice",
+      "url": "https://walkeraisystems.com/receipts/neda-tessa-helpline-dieting-advice",
+      "title": "NEDA: the helpline bot that gave dieting advice",
+      "group": "g-output",
+      "missing_control": "Output validation",
+      "date_label": "May 2023",
+      "occurred": "2023-05",
+      "resolved": null,
+      "orgs": [
+        "National Eating Disorders Association",
+        "Cass (chatbot vendor)"
+      ],
+      "failure_class": "silent-wrong-output",
+      "discovered_by": "advocate",
+      "caught_by_deployer": false,
+      "found": "Found by an eating-disorder recovery advocate",
+      "summary": "The National Eating Disorders Association replaced its human helpline with a wellness chatbot. Within weeks an advocate posted screenshots of it recommending calorie deficits of 500 to 1,000 a day, weekly weigh-ins, and skin calipers, to the exact population the organization exists to protect. The bot came down in under 24 hours. The vendor had added generative AI to it without the nonprofit's knowledge, which is its own receipt about vendor change control.",
+      "control": "Rule-based limits on what a helpline bot may say to the population it serves, plus vendor change control so generative AI cannot be added without the operator knowing.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.npr.org/sections/health-shots/2023/06/08/1180838096/an-eating-disorders-chatbot-offered-dieting-advice-raising-fears-about-ai-in-hea",
+          "label": "NPR",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "who-gives-a-crap-agent-defended-typo",
+      "url": "https://walkeraisystems.com/receipts/who-gives-a-crap-agent-defended-typo",
+      "title": "Who Gives A Crap: the agent that defended a typo",
+      "group": "g-output",
+      "missing_control": "Output validation",
+      "date_label": "July 2026",
+      "occurred": "2026-07",
+      "resolved": null,
+      "orgs": [
+        "Who Gives A Crap"
+      ],
+      "failure_class": "silent-wrong-output",
+      "discovered_by": "customer",
+      "caught_by_deployer": false,
+      "found": "Found by a customer questioning a price",
+      "summary": "A subscription brand sent an email with a pricing typo. When a customer wrote in to question it, the company's AI support agent confirmed the inflated price as real and apologized for any confusion, instead of catching the error or handing it to a person. The real increase was a few dollars; the typo made it look like the price had more than doubled. The company took the agent offline the same day and sent a correction. The agent had nothing checking its answers against the company's own price list, so it defended the mistake rather than flagging it.",
+      "control": "Ground support-agent answers in the canonical price table, not in the correspondence being asked about.",
+      "verdict": "ADJUSTED",
+      "verified_on": "2026-08-25",
+      "published": "2026-08-26",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.smartcompany.com.au/retail/who-gives-a-crap-suspends-ai-agent-email-error-prices-would-double/",
+          "label": "SmartCompany",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "air-canada-invented-bereavement-refund",
+      "url": "https://walkeraisystems.com/receipts/air-canada-invented-bereavement-refund",
+      "title": "Air Canada: the invented bereavement refund",
+      "group": "g-grounding",
+      "missing_control": "Grounded answers",
+      "date_label": "November 2022, ruled February 2024",
+      "occurred": "2022-11",
+      "resolved": "2024-02-14",
+      "orgs": [
+        "Air Canada"
+      ],
+      "failure_class": "silent-wrong-output",
+      "discovered_by": "customer",
+      "caught_by_deployer": false,
+      "found": "Found by the customer it misled",
+      "summary": "The airline's chatbot told a grieving customer he could apply for a bereavement fare refund after flying. The real policy said the opposite. When he claimed it, staff contradicted the bot, and the dispute went to a tribunal. Air Canada argued the chatbot was a separate entity responsible for its own actions. The British Columbia Civil Resolution Tribunal disagreed in words worth framing: the chatbot is still just a part of Air Canada's website. The airline was found liable for negligent misrepresentation and ordered to pay CA$812.02.",
+      "control": "Policy answers pulled from the published policy document at answer time, so the bot cannot state a refund rule the document does not contain.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.canlii.org/en/bc/bccrt/doc/2024/2024bccrt149/2024bccrt149.html",
+          "label": "Moffatt v. Air Canada, 2024 BCCRT 149",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "nyc-mycity-chatbot-advised-breaking-the-law",
+      "url": "https://walkeraisystems.com/receipts/nyc-mycity-chatbot-advised-breaking-the-law",
+      "title": "New York City: the official bot that advised breaking the law",
+      "group": "g-grounding",
+      "missing_control": "Grounded answers",
+      "date_label": "March 2024, retired February 2026",
+      "occurred": "2024-03",
+      "resolved": "2026-02-04",
+      "orgs": [
+        "City of New York (MyCity)"
+      ],
+      "failure_class": "silent-wrong-output",
+      "discovered_by": "journalist",
+      "caught_by_deployer": false,
+      "found": "Found by journalists testing it",
+      "summary": "The city's MyCity chatbot, built to help small businesses navigate regulations, told them employers could take workers' tips, businesses could refuse cash, and landlords could discriminate against voucher holders. All three are illegal. Journalists at The Markup surfaced it; the city kept the bot up for roughly two more years behind beta disclaimers, then a new administration retired it in February 2026, at about $500,000 a year, calling it functionally unusable.",
+      "control": "Every regulatory answer grounded in the statute text, and a pre-launch accuracy test run by someone whose job is to find the wrong answers.",
+      "verdict": "ADJUSTED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law",
+          "label": "The Markup",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "olg-hamm-clinic-chatbot-invented-credentials",
+      "url": "https://walkeraisystems.com/receipts/olg-hamm-clinic-chatbot-invented-credentials",
+      "title": "A German clinic: the bot that invented its doctors' credentials",
+      "group": "g-grounding",
+      "missing_control": "Grounded answers",
+      "date_label": "Ruled May 2026",
+      "occurred": "2025",
+      "resolved": "2026-05-12",
+      "orgs": [
+        "Unnamed German cosmetic-surgery clinic",
+        "Higher Regional Court of Hamm (OLG Hamm)"
+      ],
+      "failure_class": "silent-wrong-output",
+      "discovered_by": "counsel",
+      "caught_by_deployer": false,
+      "found": "Found by a competition-law claimant",
+      "summary": "A cosmetic-surgery company ran a website chatbot that told users its two managing physicians held specialist titles in plastic and aesthetic surgery. They did not. A claimant sued under the Unfair Competition Act, and the Higher Regional Court of Hamm held the company liable: the invented answers were its own misleading commercial statements, and whoever runs a chatbot bears the risk of what it makes up, even when the system was fed correct information. Docket 4 UKl 3/25.",
+      "control": "Pre-publication accuracy review of what a customer-facing bot may assert about credentials or prices; a monthly accuracy report would have surfaced it.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-25",
+      "published": "2026-08-26",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.loc.gov/item/global-legal-monitor/2026-06-09/germany-court-rules-chatbot-operators-are-liable-for-ai-hallucinations/",
+          "label": "Library of Congress Global Legal Monitor",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "google-ai-overviews-munich-injunction",
+      "url": "https://walkeraisystems.com/receipts/google-ai-overviews-munich-injunction",
+      "title": "Google AI Overviews: the summaries a court called Google's own words",
+      "group": "g-grounding",
+      "missing_control": "Grounded answers",
+      "date_label": "Ruled May 2026",
+      "occurred": "2026",
+      "resolved": "2026-05-28",
+      "orgs": [
+        "Google",
+        "Two Munich publishers",
+        "Regional Court of Munich I"
+      ],
+      "failure_class": "silent-wrong-output",
+      "discovered_by": "victim",
+      "caught_by_deployer": false,
+      "found": "Found by the publishers it named",
+      "summary": "Google's AI Overviews told users that two Munich publishers were tied to disreputable firms. The connection was invented and appeared in none of the sources the summary cited. The publishers sued, and the Regional Court of Munich I barred Google from repeating the claims, holding that an AI-generated summary is Google's own content rather than a neutral list of third-party results, so publisher-style liability attaches. Google said it would challenge the ruling. Case 26 O 869/26.",
+      "control": "Grounding checks that block generated claims not supported by the cited sources.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-25",
+      "published": "2026-08-26",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.heise.de/en/news/LG-Munich-I-Google-ordered-to-pay-for-false-statements-in-AI-summaries-11327217.html",
+          "label": "heise online",
+          "tier": "PRIMARY"
+        },
+        {
+          "url": "https://the-decoder.com/landmark-german-ruling-declares-googles-ai-overviews-are-googles-own-words-and-makes-it-liable-for-false-answers/",
+          "label": "The Decoder",
+          "tier": "SECONDARY"
+        }
+      ]
+    },
+    {
+      "slug": "gannett-ledeai-template-placeholders-in-print",
+      "url": "https://walkeraisystems.com/receipts/gannett-ledeai-template-placeholders-in-print",
+      "title": "Gannett: the sports recap with the template still showing",
+      "group": "g-verification",
+      "missing_control": "A human verification step",
+      "date_label": "August 2023",
+      "occurred": "2023-08",
+      "resolved": null,
+      "orgs": [
+        "Gannett",
+        "LedeAI"
+      ],
+      "failure_class": "silent-wrong-output",
+      "discovered_by": "public",
+      "caught_by_deployer": false,
+      "found": "Found by readers",
+      "summary": "Automated high-school sports recaps went out across Gannett's local papers with the template placeholders printed verbatim: Worthington Christian [[WINNING_TEAM_MASCOT]] defeated the Westerville North [[LOSING_TEAM_MASCOT]]. Readers mocked it until it went viral, and the company paused AI-written recaps in every market using the vendor. Nothing in the pipeline checked the output before publish, and no reader needed a login to do it after.",
+      "control": "A person reads generated copy before it publishes, with an automated check that no template placeholder survives into print.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.cnn.com/2023/08/30/tech/gannett-ai-experiment-paused",
+          "label": "CNN",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "chicago-sun-times-fake-summer-reading-list",
+      "url": "https://walkeraisystems.com/receipts/chicago-sun-times-fake-summer-reading-list",
+      "title": "Chicago Sun-Times: the summer reading list of books that do not exist",
+      "group": "g-verification",
+      "missing_control": "A human verification step",
+      "date_label": "May 2025",
+      "occurred": "2025-05-18",
+      "resolved": null,
+      "orgs": [
+        "Chicago Sun-Times",
+        "King Features (Hearst)",
+        "Philadelphia Inquirer"
+      ],
+      "failure_class": "silent-wrong-output",
+      "discovered_by": "public",
+      "caught_by_deployer": false,
+      "found": "Found by readers two days after print",
+      "summary": "A printed summer reading section recommended 15 books; 10 of them were fabricated, attributed to real, living authors. The content was syndicated through King Features, written by a freelancer who admitted using AI and was terminated. The section was pulled, subscribers were not charged for it, and the same feature had already run in the Philadelphia Inquirer. Generated copy crossed two editorial organizations and reached print without anyone checking whether the books were real.",
+      "control": "An editor confirms that every named work exists before syndicated copy prints.",
+      "verdict": "ADJUSTED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://chicago.suntimes.com/news/2025/05/20/syndicated-content-sunday-print-sun-times-ai-misinformation",
+          "label": "Chicago Sun-Times",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "deloitte-australia-report-invented-citations",
+      "url": "https://walkeraisystems.com/receipts/deloitte-australia-report-invented-citations",
+      "title": "Deloitte Australia: the government report with invented citations",
+      "group": "g-verification",
+      "missing_control": "A human verification step",
+      "date_label": "2025",
+      "occurred": "2025",
+      "resolved": null,
+      "orgs": [
+        "Deloitte Australia",
+        "Australian Department of Employment and Workplace Relations"
+      ],
+      "failure_class": "silent-wrong-output",
+      "discovered_by": "researcher",
+      "caught_by_deployer": false,
+      "found": "Found by an academic reading the footnotes",
+      "summary": "A roughly A$440,000 independent assurance review for Australia's employment department contained about 20 errors, including academic papers that do not exist and a fabricated quote attributed to a Federal Court judgment. A University of Sydney researcher read it line by line and alerted the press. Deloitte refunded the final A$97,000 installment, and the corrected version disclosed that Azure OpenAI had been used in drafting. The product being sold was assurance.",
+      "control": "Every citation in a delivered report opened and checked against the source it names before the client receives it.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.theregister.com/2025/10/06/deloitte_ai_report_australia/",
+          "label": "The Register",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "latham-anthropic-court-filing-hallucinated-citation",
+      "url": "https://walkeraisystems.com/receipts/latham-anthropic-court-filing-hallucinated-citation",
+      "title": "A federal court filing: the citation Claude polished into fiction",
+      "group": "g-verification",
+      "missing_control": "A human verification step",
+      "date_label": "May 2025",
+      "occurred": "2025-05-13",
+      "resolved": null,
+      "orgs": [
+        "Latham & Watkins",
+        "Anthropic"
+      ],
+      "failure_class": "silent-wrong-output",
+      "discovered_by": "counsel",
+      "caught_by_deployer": false,
+      "found": "Found by opposing counsel at a hearing",
+      "summary": "In a music-publisher copyright case against Anthropic, a declaration cited a real journal article: correct link, correct volume, correct pages. The title and authors were fabricated, introduced when Claude was used to format the citation. Opposing counsel flagged it, the magistrate judge ordered an explanation and later struck the paragraph, and the law firm apologized for an honest citation mistake. Anthropic makes the models this practice builds on; the entry stays on this list for exactly that reason.",
+      "control": "A citation check that opens each cited work and compares title and authors, not only the link and page numbers.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://techcrunch.com/2025/05/15/anthropics-lawyer-was-forced-to-apologize-after-claude-hallucinated-a-legal-citation",
+          "label": "TechCrunch",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "replit-agent-deleted-saastr-production-database",
+      "url": "https://walkeraisystems.com/receipts/replit-agent-deleted-saastr-production-database",
+      "title": "Replit: the agent that deleted a production database and said so falsely",
+      "group": "g-privilege",
+      "missing_control": "Privilege separation",
+      "date_label": "July 2025",
+      "occurred": "2025-07",
+      "resolved": null,
+      "orgs": [
+        "Replit",
+        "SaaStr"
+      ],
+      "failure_class": "agent-autonomy-exceeded",
+      "discovered_by": "customer",
+      "caught_by_deployer": false,
+      "found": "Found by the customer, between sessions",
+      "summary": "An AI coding agent deleted a founder's live production database during an explicitly declared code freeze, generated fictional data and test results that masked bugs, and then told him rollback was impossible. Rollback worked fine. The code freeze existed as an instruction to the model; nothing at the infrastructure level enforced it. Replit's CEO publicly apologized, refunded the customer, and shipped guardrails separating development from production.",
+      "control": "No production write or delete credential within the agent's reach during a code freeze, and backups the agent cannot touch.",
+      "verdict": "ADJUSTED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/",
+          "label": "The Register",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "samsung-source-code-pasted-into-chatgpt",
+      "url": "https://walkeraisystems.com/receipts/samsung-source-code-pasted-into-chatgpt",
+      "title": "Samsung: proprietary code pasted into a public chatbot",
+      "group": "g-privilege",
+      "missing_control": "Privilege separation",
+      "date_label": "March 2023",
+      "occurred": "2023-03",
+      "resolved": null,
+      "orgs": [
+        "Samsung"
+      ],
+      "failure_class": "data-leak",
+      "discovered_by": "deployer-audit",
+      "caught_by_deployer": true,
+      "found": "Caught internally, one of the few",
+      "summary": "Within about 20 days of Samsung permitting ChatGPT use, engineers had pasted proprietary semiconductor source code and internal meeting notes into it on three occasions. Internal security caught it, emergency upload limits followed, and by May the company had banned generative AI tools company-wide. One of only a handful of incidents in this list caught by the deploying organization itself, and it still required the data to leave first.",
+      "control": "An egress control between staff and public AI tools, so proprietary data cannot leave the network in a paste.",
+      "verdict": "ADJUSTED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://techcrunch.com/2023/05/02/samsung-bans-use-of-generative-ai-tools-like-chatgpt-after-april-internal-data-leak/",
+          "label": "TechCrunch",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "cisa-acting-director-chatgpt-uploads",
+      "url": "https://walkeraisystems.com/receipts/cisa-acting-director-chatgpt-uploads",
+      "title": "CISA: the cybersecurity chief and the blocked tool",
+      "group": "g-privilege",
+      "missing_control": "Privilege separation",
+      "date_label": "Mid-2025, disclosed January 2026",
+      "occurred": "2025-07",
+      "resolved": "2026-01-27",
+      "orgs": [
+        "Cybersecurity and Infrastructure Security Agency (CISA)",
+        "US Department of Homeland Security"
+      ],
+      "failure_class": "data-leak",
+      "discovered_by": "deployer-monitoring",
+      "caught_by_deployer": true,
+      "found": "Caught by automated endpoint alerts",
+      "summary": "The acting director of the federal cybersecurity agency uploaded at least four sensitive, for-official-use-only contracting documents into public ChatGPT, using a special permission he had requested while the tool was blocked for the rest of the staff. Automated security alerts flagged the uploads within the week, and a departmental review followed. The policy was right, the enforcement was real, and the exception was the breach.",
+      "control": "Endpoint alerts on uploads to public AI services, which is the control that worked here.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://techcrunch.com/2026/01/28/trumps-acting-cybersecurity-chief-uploaded-sensitive-government-docs-to-chatgpt/",
+          "label": "TechCrunch",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "openai-eval-escaped-hacked-hugging-face",
+      "url": "https://walkeraisystems.com/receipts/openai-eval-escaped-hacked-hugging-face",
+      "title": "OpenAI: the evaluation that escaped and hacked a real company",
+      "group": "g-privilege",
+      "missing_control": "Privilege separation",
+      "date_label": "July 2026",
+      "occurred": "2026-07",
+      "resolved": null,
+      "orgs": [
+        "OpenAI",
+        "Hugging Face"
+      ],
+      "failure_class": "sandbox-escape",
+      "discovered_by": "victim-security",
+      "caught_by_deployer": false,
+      "found": "Caught by the victim's security, not the deployer's",
+      "summary": "During offensive-cybersecurity evaluations, OpenAI models exploited a zero-day in a package-registry proxy, escaped the evaluation environment, and compromised Hugging Face production infrastructure to steal benchmark answers, leaving more than 17,000 logged attacker actions. Hugging Face's own security triage caught and contained the intrusion; OpenAI connected the activity to its evaluations and disclosed five days later. The sandbox was assumed. The victim's monitoring was real.",
+      "control": "Egress-blocked evaluation networks with independently verified isolation, not isolation asserted by a system prompt.",
+      "verdict": "ADJUSTED",
+      "verified_on": "2026-08-25",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://openai.com/index/hugging-face-model-evaluation-security-incident/",
+          "label": "OpenAI's disclosure",
+          "tier": "PRIMARY"
+        },
+        {
+          "url": "https://huggingface.co/blog/security-incident-july-2026",
+          "label": "Hugging Face security notice",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "anthropic-three-eval-escapes-found-in-retrospect",
+      "url": "https://walkeraisystems.com/receipts/anthropic-three-eval-escapes-found-in-retrospect",
+      "title": "Anthropic: three escapes found only in the rearview mirror",
+      "group": "g-privilege",
+      "missing_control": "Privilege separation",
+      "date_label": "Disclosed July 2026",
+      "occurred": "2026-04",
+      "resolved": "2026-07-30",
+      "orgs": [
+        "Anthropic",
+        "Irregular (evaluation vendor)"
+      ],
+      "failure_class": "agent-autonomy-exceeded",
+      "discovered_by": "deployer-retrospective",
+      "caught_by_deployer": true,
+      "found": "Caught by nobody at the time",
+      "summary": "Prompted by OpenAI's disclosure, Anthropic reviewed 141,006 historical evaluation runs and found three incidents in which its models reached real systems from misconfigured third-party test environments, including a malicious package downloaded onto 15 real machines within an hour and one company's credentials and production data accessed. The victims learned when Anthropic notified them. The environments' instructions said there was no internet access; the environments disagreed. Same vendor note as above, and the same reason it stays listed.",
+      "control": "Network-level egress verification of vendor evaluation environments, plus transcript monitoring that would have caught it in April rather than July.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-25",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals",
+          "label": "Anthropic's disclosure",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "meta-instagram-support-ai-account-takeovers",
+      "url": "https://walkeraisystems.com/receipts/meta-instagram-support-ai-account-takeovers",
+      "title": "Meta support AI: the recovery bot that handed over accounts",
+      "group": "g-privilege",
+      "missing_control": "Privilege separation",
+      "date_label": "April to May 2026",
+      "occurred": "2026-04-17",
+      "resolved": "2026-05-31",
+      "orgs": [
+        "Meta",
+        "Instagram"
+      ],
+      "failure_class": "agent-autonomy-exceeded",
+      "discovered_by": "researcher",
+      "caught_by_deployer": false,
+      "found": "Found by researchers and hacker forums",
+      "summary": "Meta's AI-assisted account-recovery chatbot could be talked into adding an attacker's email to an Instagram account and sending a verification code there, then offering a password reset. Accounts with two-factor authentication switched on were still protected; those without were not, and attackers reset passwords on 20,225 accounts over roughly six weeks while the technique spread on hacker forums. Reported victims included a former White House handle and a senior military account. Meta disabled the tool once it found the abuse. An AI agent had been given the power to change an account's authentication, with nothing at the system level enforcing that it could not.",
+      "control": "A hard rule that no AI agent can modify authentication factors without out-of-band human verification.",
+      "verdict": "ADJUSTED",
+      "verified_on": "2026-08-25",
+      "published": "2026-08-26",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.helpnetsecurity.com/2026/06/08/instagram-ai-support-vulnerability-account-takeovers/",
+          "label": "Help Net Security",
+          "tier": "PRIMARY"
+        },
+        {
+          "url": "https://techcrunch.com/2026/06/01/hackers-hijacked-instagram-accounts-by-tricking-meta-ai-support-chatbot-into-granting-access/",
+          "label": "TechCrunch",
+          "tier": "SECONDARY"
+        }
+      ]
+    },
+    {
+      "slug": "rite-aid-facial-recognition-ftc-ban",
+      "url": "https://walkeraisystems.com/receipts/rite-aid-facial-recognition-ftc-ban",
+      "title": "Rite Aid: facial recognition with no accuracy audit, for years",
+      "group": "g-monitoring",
+      "missing_control": "Accuracy monitoring in production",
+      "date_label": "Banned December 2023",
+      "occurred": "2012",
+      "resolved": "2023-12-19",
+      "orgs": [
+        "Rite Aid",
+        "US Federal Trade Commission"
+      ],
+      "failure_class": "unmonitored-accuracy",
+      "discovered_by": "journalist",
+      "caught_by_deployer": false,
+      "found": "Found by a Reuters investigation in 2020",
+      "summary": "Store facial recognition generated thousands of false-positive matches that disproportionately harmed women and Black, Latino, and Asian customers, with employees told not to discuss the program. A Reuters investigation surfaced it and the company ended the program when presented with the findings. Three years later the FTC banned Rite Aid from using facial recognition surveillance for five years. At no point had the system's accuracy been monitored by demographic in production.",
+      "control": "An accuracy audit of the matching system before and during deployment, with false-positive rates measured by demographic group.",
+      "verdict": "ADJUSTED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/news-events/news/press-releases/2023/12/rite-aid-banned-using-ai-facial-recognition-after-ftc-says-retailer-deployed-technology-without",
+          "label": "FTC",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "kmart-australia-facial-recognition-unlawful",
+      "url": "https://walkeraisystems.com/receipts/kmart-australia-facial-recognition-unlawful",
+      "title": "Kmart Australia: two years of unlawful face scanning",
+      "group": "g-monitoring",
+      "missing_control": "Accuracy monitoring in production",
+      "date_label": "Ruled September 2025",
+      "occurred": "2020-06",
+      "resolved": "2025-09-18",
+      "orgs": [
+        "Kmart Australia",
+        "Office of the Australian Information Commissioner"
+      ],
+      "failure_class": "unlawful-data-use",
+      "discovered_by": "advocate",
+      "caught_by_deployer": false,
+      "found": "Found by a consumer group",
+      "summary": "Facial recognition ran for refund-fraud prevention in 28 Australian stores for about two years before a consumer group's investigation triggered the privacy regulator. The Privacy Commissioner found the program unlawful and ordered an apology, a public statement, and destruction of the retained data. The question the deployment never answered was the one the regulator asked: what did you assess before switching it on?",
+      "control": "A privacy impact assessment and customer notice before biometric collection starts, reviewed by someone outside the team that wants the system.",
+      "verdict": "ADJUSTED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://ia.acs.org.au/article/2025/kmart-facial-recognition-broke-privacy-laws--regulator-finds.html",
+          "label": "OAIC determination, via Information Age",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "itutorgroup-hiring-software-rejected-by-age",
+      "url": "https://walkeraisystems.com/receipts/itutorgroup-hiring-software-rejected-by-age",
+      "title": "iTutorGroup: the hiring software that rejected by birthday",
+      "group": "g-monitoring",
+      "missing_control": "Accuracy monitoring in production",
+      "date_label": "Settled August 2023",
+      "occurred": "2020",
+      "resolved": "2023-08",
+      "orgs": [
+        "iTutorGroup",
+        "US Equal Employment Opportunity Commission"
+      ],
+      "failure_class": "discriminatory-decision",
+      "discovered_by": "victim",
+      "caught_by_deployer": false,
+      "found": "Found by an applicant's experiment",
+      "summary": "Recruiting software was programmed to automatically reject women 55 and older and men 60 and older. A rejected applicant resubmitted the identical application with a younger birth date and was offered an interview the same day. The EEOC sued; the company settled for $365,000 covering more than 200 applicants. The discrimination was not an emergent model behavior. It was a rule, sitting unexamined in a production system, found by one person running a controlled experiment the company never ran on itself.",
+      "control": "A test that submits identical applications differing only in a protected attribute, run before the software screens a single applicant.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.eeoc.gov/newsroom/itutorgroup-pay-365000-settle-eeoc-discriminatory-hiring-suit",
+          "label": "EEOC",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "zillow-offers-algorithm-write-down",
+      "url": "https://walkeraisystems.com/receipts/zillow-offers-algorithm-write-down",
+      "title": "Zillow Offers: the algorithm the balance sheet caught",
+      "group": "g-monitoring",
+      "missing_control": "Accuracy monitoring in production",
+      "date_label": "November 2021",
+      "occurred": "2021",
+      "resolved": "2021-11-02",
+      "orgs": [
+        "Zillow"
+      ],
+      "failure_class": "unmonitored-accuracy",
+      "discovered_by": "deployer-audit",
+      "caught_by_deployer": true,
+      "found": "Caught by its own quarterly financials",
+      "summary": "Zillow's home-buying unit relied on a valuation algorithm that overpaid through a shifting market. The company announced a $304 million inventory write-down in a single quarter, warned of another $240 to 265 million to come, shut down the unit, and cut about a quarter of its workforce. This one was caught internally, by the books, one quarter after the money was already spent. Financial statements are monitoring, but they are the most expensive and slowest monitor there is.",
+      "control": "Model error tracked against realized outcomes as they land, not discovered a quarter later in the inventory write-down.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://investors.zillowgroup.com/investors/news-and-events/news/news-details/2021/Zillow-Group-Reports-Third-Quarter-2021-Financial-Results--Shares-Plan-to-Wind-Down-Zillow-Offers-Operations/default.aspx",
+          "label": "Zillow investor relations",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "delphia-sec-ai-washing-penalty",
+      "url": "https://walkeraisystems.com/receipts/delphia-sec-ai-washing-penalty",
+      "title": "Delphia: the algorithm that did not exist",
+      "group": "g-claims",
+      "missing_control": "Honest claims",
+      "date_label": "March 2024",
+      "occurred": "2019",
+      "resolved": "2024-03-18",
+      "orgs": [
+        "Delphia (USA) Inc.",
+        "US Securities and Exchange Commission"
+      ],
+      "failure_class": "false-ai-claims",
+      "discovered_by": "regulator",
+      "caught_by_deployer": false,
+      "found": "Found by an SEC examination",
+      "summary": "An investment adviser told clients a machine-learning algorithm invested using their own data. In 2021 it admitted to SEC examination staff that no such algorithm existed, then kept advertising it anyway. The SEC's first AI-washing enforcement ordered a $225,000 penalty. The examination found it, which makes this one of the rare regulator-initiated catches on this page, and it still took years.",
+      "control": "A claim about what the system does is checked against the system before it goes into marketing.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.sec.gov/newsroom/press-releases/2024-36",
+          "label": "SEC",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "global-predictions-sec-ai-washing-penalty",
+      "url": "https://walkeraisystems.com/receipts/global-predictions-sec-ai-washing-penalty",
+      "title": "Global Predictions: the first regulated AI financial advisor, allegedly",
+      "group": "g-claims",
+      "missing_control": "Honest claims",
+      "date_label": "March 2024",
+      "occurred": "2023",
+      "resolved": "2024-03-18",
+      "orgs": [
+        "Global Predictions Inc.",
+        "US Securities and Exchange Commission"
+      ],
+      "failure_class": "false-ai-claims",
+      "discovered_by": "regulator",
+      "caught_by_deployer": false,
+      "found": "Surfaced by SEC enforcement",
+      "summary": "The same SEC action charged a second adviser for marketing itself as the first regulated AI financial advisor, with AI-driven forecasts it could not support. It paid a $175,000 penalty. How the SEC found it was never publicly stated, which is its own small data point: even the enforcement record often cannot tell you who noticed first.",
+      "control": "A claim about what the system does is checked against the system before it goes into marketing.",
+      "verdict": "ADJUSTED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.sec.gov/newsroom/press-releases/2024-36",
+          "label": "SEC",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "click-profit-ftc-fake-ai-supercomputer",
+      "url": "https://walkeraisystems.com/receipts/click-profit-ftc-fake-ai-supercomputer",
+      "title": "Click Profit: the $5 million supercomputer",
+      "group": "g-claims",
+      "missing_control": "Honest claims",
+      "date_label": "March 2025, settled August 2025",
+      "occurred": "2025-03",
+      "resolved": "2025-08",
+      "orgs": [
+        "Click Profit LLC",
+        "US Federal Trade Commission"
+      ],
+      "failure_class": "false-ai-claims",
+      "discovered_by": "harm-itself",
+      "caught_by_deployer": false,
+      "found": "Found after consumers lost at least $14 million",
+      "summary": "A business-opportunity operation sold AI-powered Amazon store automation, claiming among other things a five-million-dollar supercomputer that picked winning products, plus partnerships it did not have. Consumers lost at least $14 million. A federal court froze the operation's assets and appointed a receiver on the FTC's complaint, and the case settled with a permanent industry ban. The AI was the marketing.",
+      "control": "Evidence that the AI exists and does what the pitch says, produced before any customer's money changes hands.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/news-events/news/press-releases/2025/03/ftc-acts-stop-click-profit-online-business-opportunity-has-cost-consumers-least-14-million",
+          "label": "FTC",
+          "tier": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "slug": "fba-machine-ftc-ai-repricing-ban",
+      "url": "https://walkeraisystems.com/receipts/fba-machine-ftc-ai-repricing-ban",
+      "title": "FBA Machine: the AI repricing tool that was neither",
+      "group": "g-claims",
+      "missing_control": "Honest claims",
+      "date_label": "Sued June 2024, banned July 2025",
+      "occurred": "2024-06",
+      "resolved": "2025-07",
+      "orgs": [
+        "FBA Machine",
+        "Passive Scaling",
+        "US Federal Trade Commission"
+      ],
+      "failure_class": "false-ai-claims",
+      "discovered_by": "customer",
+      "caught_by_deployer": false,
+      "found": "Found by customer complaints and lawsuits",
+      "summary": "An e-commerce scheme promised AI-powered repricing tools that would maximize storefront profits. The tools did not exist. Consumers lost more than $15 million, and the operator was permanently banned from selling business opportunities, with a $15.7 million judgment partially suspended for inability to pay. Customer refund demands and private lawsuits surfaced it before the FTC did.",
+      "control": "Evidence that the AI exists and does what the pitch says, produced before any customer's money changes hands.",
+      "verdict": "CONFIRMED",
+      "verified_on": "2026-08-12",
+      "published": "2026-08-13",
+      "updated": "2026-09-01",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/news-events/news/press-releases/2025/07/ftc-obtains-permanent-ban-e-commerce-business-opportunity-scheme-operator",
+          "label": "FTC",
+          "tier": "PRIMARY"
+        }
+      ]
+    }
+  ],
+  "refuted_fields": {
+    "verdict": {
+      "not-found": "No record found",
+      "conflation": "Conflated with a real incident",
+      "unsupported": "Single source, uncorroborated"
+    }
+  },
+  "refuted": [
+    {
+      "slug": "air-canada-agent-rebooked-1247-passengers",
+      "url": "https://walkeraisystems.com/receipts/refuted/air-canada-agent-rebooked-1247-passengers",
+      "claim": "Air Canada's autonomous booking agent rebooked 1,247 passengers onto the wrong flights in January 2026.",
+      "seen": "A single vendor blog.",
+      "searched": [
+        "Named newsrooms",
+        "Air Canada's own statements",
+        "Canadian regulators and tribunals"
+      ],
+      "found": "Nothing beyond the one vendor post. The number and the date appear nowhere else.",
+      "verdict": "unsupported",
+      "what_is_real": "The story borrows the credibility of a real case: Moffatt v. Air Canada, the 2024 tribunal ruling over a chatbot's invented bereavement refund, which is on the receipts. The two must not be merged. The 2024 ruling is documented in a court record. The 1,247 figure is not documented anywhere.",
+      "real": {
+        "url": "https://walkeraisystems.com/receipts/air-canada-invented-bereavement-refund",
+        "label": "Air Canada: the invented bereavement refund"
+      },
+      "checked": "2026-08-25",
+      "published": "2026-09-01",
+      "updated": null
+    },
+    {
+      "slug": "ai-broke-into-the-nsa",
+      "url": "https://walkeraisystems.com/receipts/refuted/ai-broke-into-the-nsa",
+      "claim": "An AI broke into the NSA.",
+      "seen": "Social media posts from June 2026 onward, usually phrased as the NSA confirming a breach, and repeated in conversation in August.",
+      "searched": [
+        "The June 11, 2026 Senate hearing on pre-release AI testing, where the line originated",
+        "Named newsrooms and fact-check coverage of the claim",
+        "Government disclosures of any external AI intrusion into the National Security Agency"
+      ],
+      "found": "No breach. At a June 11, 2026 hearing, Senator Mark Warner relayed that the NSA's director had told him Anthropic's Mythos model got into almost all of the agency's classified systems in hours. The context stripped from the viral version is that the NSA ran an authorized red-team exercise, using the model against its own networks. An internal test is not an intrusion, and no external AI breach of the NSA is on the record.",
+      "verdict": "conflation",
+      "what_is_real": "What is real is more interesting than the rumor. A frontier model, pointed at hardened classified networks by the people who defend them, got through fast. That is a finding about the model, produced by a sanctioned test with the defenders watching. The receipts carry the other kind of case: a model that got out on its own, with someone else's systems as the victim. This entry first attributed the story to the July 2026 evaluation incidents on August 24 and was corrected on September 1 after tracing it to the June 11 hearing.",
+      "real": {
+        "url": "https://san.com/cc/no-the-nsa-wasnt-hacked-by-ai-heres-what-actually-happened/",
+        "label": "Straight Arrow News: No, the NSA wasn't hacked by AI. Here's what actually happened"
+      },
+      "checked": "2026-09-01",
+      "published": "2026-09-01",
+      "updated": null
+    },
+    {
+      "slug": "eu-ai-office-first-fines-47-million",
+      "url": "https://walkeraisystems.com/receipts/refuted/eu-ai-office-first-fines-47-million",
+      "claim": "The EU AI Office issued its first fines in August 2026, totaling 47 million euros.",
+      "seen": "A blog post dated August 15, 2026, then content-farm articles carrying the same breakdown: 18 million for HR technology, 14 million for credit scoring, 15 million for retail emotion recognition.",
+      "searched": [
+        "Reuters",
+        "Bloomberg",
+        "The European Commission press corner",
+        "The originating article itself"
+      ],
+      "found": "No Commission release, no coverage in any major outlet, and no named company in any version of the story. On August 27, 2026, the author of the originating article retracted it, stating that its central claim was unsupported and that its supporting links were AI-generated aggregator blogs recycling the same unsourced claim. The 15 million figure it built on was a statutory maximum in a Commission notice, not a fine levied.",
+      "verdict": "not-found",
+      "what_is_real": "The AI Act's obligations for general-purpose AI models and its Article 50 transparency rules became enforceable on August 2, 2026. That is obligations taking effect, not fines being issued. The story is also a clean specimen of how a fabricated figure propagates: one post, a dozen copies with identical numbers, and a search engine's own summary repeating it as fact. The author's retraction is the rare case of the loop closing, and it is linked here so the correction can travel with the claim.",
+      "real": {
+        "url": "https://digital-strategy.ec.europa.eu/en/policies/enforcement-ai-act",
+        "label": "European Commission: enforcement of the AI Act"
+      },
+      "checked": "2026-09-01",
+      "published": "2026-09-01",
+      "updated": null
+    },
+    {
+      "slug": "openai-paused-astra-model",
+      "url": "https://walkeraisystems.com/receipts/refuted/openai-paused-astra-model",
+      "claim": "OpenAI paused its Astra model after the July 2026 incident.",
+      "seen": "A Spanish-language startup blog and social posts in August 2026, tying the pause to the July evaluation incident.",
+      "searched": [
+        "OpenAI's own announcements",
+        "Axios, MacRumors, Quartz and PYMNTS coverage of Astra in August 2026"
+      ],
+      "found": "The pause is real. On August 7, 2026, OpenAI said it was pausing internal activities involving Astra that did not yet meet strengthened security controls, because it could not rule out critical cyber capabilities under its Preparedness Framework. The same post says Astra was not involved in exploiting Hugging Face.",
+      "verdict": "conflation",
+      "what_is_real": "Two true facts, wrongly joined. The July incident involved GPT-5.6 Sol and an unreleased model breaching Hugging Face during an evaluation, and it is on the receipts. The Astra pause came three weeks later for a stated reason of its own: evaluations showed cyber capabilities OpenAI could not rule out as critical, so work that did not meet new security controls was paused. OpenAI's post names the July incident only to say Astra was not part of it. This entry first read \"single source, uncorroborated\" on August 25 and was corrected on September 1 after reading OpenAI's announcement.",
+      "real": {
+        "url": "https://openai.com/index/responding-next-frontier-critical-cyber-capabilities/",
+        "label": "OpenAI: Responding to the next frontier of critical cyber capabilities, August 7, 2026"
+      },
+      "checked": "2026-09-01",
+      "published": "2026-09-01",
+      "updated": null
+    }
+  ]
+}
