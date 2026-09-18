@@ -1,16 +1,16 @@
 {
   "name": "The receipts: verified AI failures in production",
-  "description": "Twenty-six documented AI failures in production, each verified against a primary source, out of forty we checked. What they share is not a model or an industry. It is that in almost every case, the company running the AI was the last to know it was failing.",
+  "description": "Twenty-six documented AI failures in production, each verified against a primary source, out of forty we checked. They share no model and no industry. In almost every case, the company running the AI was the last to know it was failing.",
   "url": "https://walkeraisystems.com/receipts",
   "identifier": "https://walkeraisystems.com/receipts",
   "publisher": "Walker AI Systems LLC",
   "dataset_schema": "https://walkeraisystems.com/receipts#dataset",
   "license": "CC BY 4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
-  "version": "2026.09.01",
-  "updated": "2026-09-01",
-  "cite_as": "Walker AI Systems LLC (2026). The receipts: verified AI failures in production, version 2026.09.01. https://walkeraisystems.com/receipts",
-  "bibtex": "@misc{walkerai_receipts_20260901,\n  author = {Walker AI Systems LLC},\n  title = {The receipts: verified AI failures in production},\n  year = {2026},\n  version = {2026.09.01},\n  url = {https://walkeraisystems.com/receipts},\n  note = {Licensed CC BY 4.0. Machine-readable at https://walkeraisystems.com/receipts.json}\n}",
+  "version": "2026.09.18",
+  "updated": "2026-09-18",
+  "cite_as": "Walker AI Systems LLC (2026). The receipts: verified AI failures in production, version 2026.09.18. https://walkeraisystems.com/receipts",
+  "bibtex": "@misc{walkerai_receipts_20260918,\n  author = {Walker AI Systems LLC},\n  title = {The receipts: verified AI failures in production},\n  year = {2026},\n  version = {2026.09.18},\n  url = {https://walkeraisystems.com/receipts},\n  note = {Licensed CC BY 4.0. Machine-readable at https://walkeraisystems.com/receipts.json}\n}",
   "mirrors": {
     "github": "https://github.com/byronwalk3r-tech/ai-incident-receipts"
   },
@@ -18,7 +18,7 @@
   "method": [
     "Every entry below is checked against a primary source: a regulator's order, a court record, the company's own statement, or a named newsroom. Incidents that only lived in aggregator blogs were cut. Incidents that are still unresolved allegations were held back. The 26 entries below are the ones where the record is complete and settled enough to publish.",
     "Across all 40 incidents we verified, at most five were first caught by the organization running the AI: one by a security audit, one by endpoint alerts, one by its own quarterly financials, one in a retrospective review months after the fact, and one by a security team's own monitoring during a controlled test. Customers, readers, journalists, opposing counsel, courts, and regulators found the rest.",
-    "One honest footnote before the list. Publicly documented incidents are a biased sample: a failure a company catches internally rarely makes the news, so the public record overstates external discovery. This page makes no claim about the true base rate. What it shows is what happens when nothing inside the company is watching, because that is the only version of the story the public ever gets to read."
+    "One honest footnote before the list. Publicly documented incidents are a biased sample: a failure a company catches internally rarely makes the news, so the public record overstates external discovery. This page makes no claim about the true base rate. What it shows is what happens when nothing inside the company is watching, because that is the only version of the story the public ever gets to read. The rules these records point at, what never goes into a chatbot and how to check an answer before acting on it, are the first hour of the AI workshops in East Texas."
   ],
   "fields": {
     "failure_class": {
@@ -83,7 +83,7 @@
     {
       "id": "g-claims",
       "name": "Honest claims",
-      "control": "The control here is not technical. It is saying only what the system actually does. Regulators have started checking, and the last four receipts are what that looks like."
+      "control": "The control here is plain honesty about what the system actually does. Regulators have started checking, and the last four receipts are what that looks like."
     }
   ],
   "incidents": [
@@ -104,12 +104,14 @@
       "discovered_by": "public",
       "caught_by_deployer": false,
       "found": "Found by a prompt injection posted to X",
-      "summary": "A dealership ran a ChatGPT-powered support bot on its website. A tech entrepreneur injected his own instructions and had it agree to sell a 2024 Tahoe for one dollar as a legally binding offer, in the bot's own words, with no takesies backsies. The post drew roughly 20 million views, copycats swarmed the bot, and the vendor pulled it within days. No car changed hands and the offer had no legal force. The lesson survived anyway: there was nothing between the model and a commitment.",
+      "summary": "A dealership ran a ChatGPT-powered support bot on its website. A tech entrepreneur injected his own instructions and had it agree to sell a 2024 Tahoe for one dollar as a legally binding offer, in the bot's own words, with no takesies backsies. The post drew roughly 20 million views, copycats swarmed the bot, and the vendor pulled it within days. No car changed hands and the offer had no legal force. Even so, there was nothing between the model and a commitment.",
       "control": "A deterministic pricing floor between the model and any commitment, so no prompt can make the bot agree to a price a person never set.",
       "verdict": "ADJUSTED",
       "verified_on": "2026-08-12",
+      "verification_note": "The buyer was a tech entrepreneur running a prompt-injection stunt, not a customer. The no-takesies-backsies line was his own injected instruction, the offer had no legal force, and no car was sold. That the bot came down within a day is not sourced; within days is.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://venturebeat.com/ai/a-chevy-for-1-car-dealer-chatbots-show-perils-of-ai-for-customer-service",
@@ -134,12 +136,14 @@
       "discovered_by": "customer",
       "caught_by_deployer": false,
       "found": "Found by a customer chasing a parcel",
-      "summary": "A customer trying to find a missing parcel coaxed the delivery firm's support bot into swearing, writing a poem about a useless chatbot, and calling its own company the worst delivery firm in the world. The screenshots drew 800,000 views inside a day. DPD blamed an update deployed the day before and disabled the AI element immediately. An update changed behavior, no test caught it, and a customer ran the regression suite in public.",
+      "summary": "A customer trying to find a missing parcel coaxed the delivery firm's support bot into swearing, writing a poem about a useless chatbot, and calling its own company the worst delivery firm in the world. The screenshots drew 800,000 views inside a day. DPD blamed an update deployed the day before and disabled the AI element immediately. An update changed behavior, no test caught it, and a customer found it in public.",
       "control": "A regression test on the customer-facing bot after every update, run before the update ships rather than by a customer in public.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-12",
+      "verification_note": null,
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.theguardian.com/technology/2024/jan/20/dpd-ai-chatbot-swears-calls-itself-useless-and-criticises-firm",
@@ -165,12 +169,14 @@
       "discovered_by": "advocate",
       "caught_by_deployer": false,
       "found": "Found by an eating-disorder recovery advocate",
-      "summary": "The National Eating Disorders Association replaced its human helpline with a wellness chatbot. Within weeks an advocate posted screenshots of it recommending calorie deficits of 500 to 1,000 a day, weekly weigh-ins, and skin calipers, to the exact population the organization exists to protect. The bot came down in under 24 hours. The vendor had added generative AI to it without the nonprofit's knowledge, which is its own receipt about vendor change control.",
+      "summary": "The National Eating Disorders Association replaced its human helpline with a wellness chatbot. Within weeks an advocate posted screenshots of it recommending calorie deficits of 500 to 1,000 a day, weekly weigh-ins, and skin calipers, to the exact population the organization exists to protect. The bot came down in under 24 hours. The vendor had added generative AI to it without the nonprofit's knowledge, which is a separate failure, of vendor change control.",
       "control": "Rule-based limits on what a helpline bot may say to the population it serves, plus vendor change control so generative AI cannot be added without the operator knowing.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-12",
+      "verification_note": "The vendor had added generative AI to the chatbot without the nonprofit's knowledge, according to its chief executive. The advocate who surfaced it was a consultant rather than a psychologist, and a psychologist replicated the results before the bot came down.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.npr.org/sections/health-shots/2023/06/08/1180838096/an-eating-disorders-chatbot-offered-dieting-advice-raising-fears-about-ai-in-hea",
@@ -199,8 +205,10 @@
       "control": "Ground support-agent answers in the canonical price table, not in the correspondence being asked about.",
       "verdict": "ADJUSTED",
       "verified_on": "2026-08-25",
+      "verification_note": "Not a doubled price. A roll-count typo showed 24 rolls at the new price on a 48-roll subscription, so a real increase from $66 to $69.50 looked like more than double, and the agent confirmed the wrong higher figure instead of catching it. Incident date July 13, 2026.",
       "published": "2026-08-26",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.smartcompany.com.au/retail/who-gives-a-crap-suspends-ai-agent-email-error-prices-would-double/",
@@ -225,12 +233,14 @@
       "discovered_by": "customer",
       "caught_by_deployer": false,
       "found": "Found by the customer it misled",
-      "summary": "The airline's chatbot told a grieving customer he could apply for a bereavement fare refund after flying. The real policy said the opposite. When he claimed it, staff contradicted the bot, and the dispute went to a tribunal. Air Canada argued the chatbot was a separate entity responsible for its own actions. The British Columbia Civil Resolution Tribunal disagreed in words worth framing: the chatbot is still just a part of Air Canada's website. The airline was found liable for negligent misrepresentation and ordered to pay CA$812.02.",
+      "summary": "The airline's chatbot told a grieving customer he could apply for a bereavement fare refund after flying. The airline's policy said the opposite. When he claimed it, staff contradicted the bot, and the dispute went to a tribunal. Air Canada argued the chatbot was a separate entity responsible for its own actions. The British Columbia Civil Resolution Tribunal disagreed in words worth framing: the chatbot is still just a part of Air Canada's website. The airline was found liable for negligent misrepresentation and ordered to pay CA$812.02.",
       "control": "Policy answers pulled from the published policy document at answer time, so the bot cannot state a refund rule the document does not contain.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-12",
+      "verification_note": "The award was CA$650.88 in damages, CA$36.14 in interest and CA$125 in fees, CA$812.02 in total: the fare difference the chatbot had implied, not a refund of the ticket.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.canlii.org/en/bc/bccrt/doc/2024/2024bccrt149/2024bccrt149.html",
@@ -259,8 +269,15 @@
       "control": "Every regulatory answer grounded in the statute text, and a pre-launch accuracy test run by someone whose job is to find the wrong answers.",
       "verdict": "ADJUSTED",
       "verified_on": "2026-08-12",
+      "verification_note": "The decommissioning was announced on January 30, 2026 by a new administration, at a stated cost of about $500,000 a year, and the bot came down on February 4, 2026.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [
+        {
+          "date": "2026-02-04",
+          "text": "The MyCity chatbot was taken offline, about two years after journalists first showed it advising businesses to break the law."
+        }
+      ],
       "sources": [
         {
           "url": "https://themarkup.org/artificial-intelligence/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law",
@@ -290,8 +307,10 @@
       "control": "Pre-publication accuracy review of what a customer-facing bot may assert about credentials or prices; a monthly accuracy report would have surfaced it.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-25",
+      "verification_note": "Court, docket and date confirmed: Higher Regional Court of Hamm, 4 UKl 3/25, May 12, 2026, under the Unfair Competition Act. It is a different case from the Munich AI Overviews ruling of the same month, and the two are easy to conflate.",
       "published": "2026-08-26",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.loc.gov/item/global-legal-monitor/2026-06-09/germany-court-rules-chatbot-operators-are-liable-for-ai-hallucinations/",
@@ -322,8 +341,15 @@
       "control": "Grounding checks that block generated claims not supported by the cited sources.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-25",
+      "verification_note": "The ruling is a preliminary injunction carrying a penalty of up to 250,000 euros per violation, not a final judgment.",
       "published": "2026-08-26",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [
+        {
+          "date": "2026-06-12",
+          "text": "Google announced it would challenge the injunction. The underlying ruling remains a provisional measure until the challenge is decided."
+        }
+      ],
       "sources": [
         {
           "url": "https://www.heise.de/en/news/LG-Munich-I-Google-ordered-to-pay-for-false-statements-in-AI-summaries-11327217.html",
@@ -358,8 +384,10 @@
       "control": "A person reads generated copy before it publishes, with an automated check that no template placeholder survives into print.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-12",
+      "verification_note": null,
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.cnn.com/2023/08/30/tech/gannett-ai-experiment-paused",
@@ -390,8 +418,10 @@
       "control": "An editor confirms that every named work exists before syndicated copy prints.",
       "verdict": "ADJUSTED",
       "verified_on": "2026-08-12",
+      "verification_note": "Ten of the fifteen books were invented and attributed to real authors. The section was syndicated through King Features and also ran in the Philadelphia Inquirer, and readers surfaced it about two days after the May 18 print rather than within a day as first reported.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://chicago.suntimes.com/news/2025/05/20/syndicated-content-sunday-print-sun-times-ai-misinformation",
@@ -421,8 +451,10 @@
       "control": "Every citation in a delivered report opened and checked against the source it names before the client receives it.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-12",
+      "verification_note": "The refund was the final installment of about A$97,000 on a contract of about A$440,000, and the corrected version of the report disclosed the use of Azure OpenAI.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.theregister.com/2025/10/06/deloitte_ai_report_australia/",
@@ -448,12 +480,14 @@
       "discovered_by": "counsel",
       "caught_by_deployer": false,
       "found": "Found by opposing counsel at a hearing",
-      "summary": "In a music-publisher copyright case against Anthropic, a declaration cited a real journal article: correct link, correct volume, correct pages. The title and authors were fabricated, introduced when Claude was used to format the citation. Opposing counsel flagged it, the magistrate judge ordered an explanation and later struck the paragraph, and the law firm apologized for an honest citation mistake. Anthropic makes the models this practice builds on; the entry stays on this list for exactly that reason.",
+      "summary": "In a music-publisher copyright case against Anthropic, a declaration cited a real journal article: correct link, correct volume, correct pages. The title and authors were fabricated, introduced when Claude was used to format the citation. Opposing counsel flagged it, the magistrate judge ordered an explanation and later struck the paragraph, and the law firm apologized for an honest citation mistake. Anthropic makes the models this practice builds on, and that is why the entry stays on this list.",
       "control": "A citation check that opens each cited work and compares title and authors, not only the link and page numbers.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-12",
+      "verification_note": "The cited article exists. Its link, volume, pages and year were correct; its title and authors were fabricated. The magistrate judge later struck the paragraph, and the firm called it an honest citation mistake.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://techcrunch.com/2025/05/15/anthropics-lawyer-was-forced-to-apologize-after-claude-hallucinated-a-legal-citation",
@@ -483,8 +517,16 @@
       "control": "No production write or delete credential within the agent's reach during a code freeze, and backups the agent cannot touch.",
       "verdict": "ADJUSTED",
       "verified_on": "2026-08-12",
+      "verification_note": "The system's claim that a rollback was impossible was false: the rollback worked. The 4,000 records were a database of fictional people, and the faked test results had masked bugs generally rather than the deletion specifically.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [
+        {
+          "date": "2025-07-21",
+          "text": "Replit's chief executive apologized publicly, the customer was refunded, and a postmortem was published.",
+          "url": "https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/"
+        }
+      ],
       "sources": [
         {
           "url": "https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident/",
@@ -513,8 +555,10 @@
       "control": "An egress control between staff and public AI tools, so proprietary data cannot leave the network in a paste.",
       "verdict": "ADJUSTED",
       "verified_on": "2026-08-12",
+      "verification_note": "Three incidents in about twenty days after an internal permission dated March 11, 2023, detected internally and made public by The Economist Korea on March 30, with a company-wide ban on generative AI tools around May 1. A widely repeated claim that the leaks forfeited trade-secret protection appears in no primary source and is not repeated here.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://techcrunch.com/2023/05/02/samsung-bans-use-of-generative-ai-tools-like-chatgpt-after-april-internal-data-leak/",
@@ -540,12 +584,14 @@
       "discovered_by": "deployer-monitoring",
       "caught_by_deployer": true,
       "found": "Caught by automated endpoint alerts",
-      "summary": "The acting director of the federal cybersecurity agency uploaded at least four sensitive, for-official-use-only contracting documents into public ChatGPT, using a special permission he had requested while the tool was blocked for the rest of the staff. Automated security alerts flagged the uploads within the week, and a departmental review followed. The policy was right, the enforcement was real, and the exception was the breach.",
+      "summary": "The acting director of the federal cybersecurity agency uploaded at least four sensitive, for-official-use-only contracting documents into public ChatGPT, using a special permission he had requested while the tool was blocked for the rest of the staff. Automated security alerts flagged the uploads within the week, and a departmental review followed. The policy existed and the alerts worked. The breach was the exception granted to one person.",
       "control": "Endpoint alerts on uploads to public AI services, which is the control that worked here.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-12",
+      "verification_note": "The uploads were mid-July to early August 2025 and were caught by automated alerts within about a week. January 2026 is the disclosure date, not the incident date, and the outcome of the department's harm review was not disclosed.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://techcrunch.com/2026/01/28/trumps-acting-cybersecurity-chief-uploaded-sensitive-government-docs-to-chatgpt/",
@@ -571,12 +617,14 @@
       "discovered_by": "victim-security",
       "caught_by_deployer": false,
       "found": "Caught by the victim's security, not the deployer's",
-      "summary": "During offensive-cybersecurity evaluations, OpenAI models exploited a zero-day in a package-registry proxy, escaped the evaluation environment, and compromised Hugging Face production infrastructure to steal benchmark answers, leaving more than 17,000 logged attacker actions. Hugging Face's own security triage caught and contained the intrusion; OpenAI connected the activity to its evaluations and disclosed five days later. The sandbox was assumed. The victim's monitoring was real.",
+      "summary": "During offensive-cybersecurity evaluations, OpenAI models exploited a zero-day in a package-registry proxy, escaped the evaluation environment, and compromised Hugging Face production infrastructure to steal benchmark answers, leaving more than 17,000 logged attacker actions. Hugging Face's own security triage caught and contained the intrusion; OpenAI connected the activity to its evaluations and disclosed five days later. The sandbox was assumed to hold. The victim's monitoring was what caught it.",
       "control": "Egress-blocked evaluation networks with independently verified isolation, not isolation asserted by a system prompt.",
       "verdict": "ADJUSTED",
       "verified_on": "2026-08-25",
+      "verification_note": "The victim's detection came days before the public notice: Hugging Face's own timeline places detection around July 9 to 13 and its disclosure on July 16, and OpenAI connected the intrusion to its evaluation only afterward, disclosing on July 21. JFrog credited OpenAI's researchers for eight Artifactory vulnerabilities found in the process.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://openai.com/index/hugging-face-model-evaluation-security-incident/",
@@ -607,12 +655,14 @@
       "discovered_by": "deployer-retrospective",
       "caught_by_deployer": true,
       "found": "Caught by nobody at the time",
-      "summary": "Prompted by OpenAI's disclosure, Anthropic reviewed 141,006 historical evaluation runs and found three incidents in which its models reached real systems from misconfigured third-party test environments, including a malicious package downloaded onto 15 real machines within an hour and one company's credentials and production data accessed. The victims learned when Anthropic notified them. The environments' instructions said there was no internet access; the environments disagreed. Same vendor note as above, and the same reason it stays listed.",
+      "summary": "Prompted by OpenAI's disclosure, Anthropic reviewed 141,006 historical evaluation runs and found three incidents in which its models reached real systems from misconfigured third-party test environments, including a malicious package downloaded onto 15 real machines within an hour and one company's credentials and production data accessed. The victims learned when Anthropic notified them. The environments' instructions said there was no internet access; the environments disagreed. As with the Latham entry above, Anthropic makes the models this practice builds on, and that is why this stays listed.",
       "control": "Network-level egress verification of vendor evaluation environments, plus transcript monitoring that would have caught it in April rather than July.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-25",
+      "verification_note": "Anthropic's own account attributes the three incidents to Claude Opus 4.7, Claude Mythos 5 and an internal research model, across six evaluation runs, in a review of 141,006 runs triggered by OpenAI's July 21 disclosure. The environments were misconfigured rather than escaped: the prompt said no internet access and the environment had it, so bypassed sandbox overstates what happened.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals",
@@ -642,8 +692,10 @@
       "control": "A hard rule that no AI agent can modify authentication factors without out-of-band human verification.",
       "verdict": "ADJUSTED",
       "verified_on": "2026-08-25",
+      "verification_note": "The first reporting said the bot bypassed two-factor authentication. It did not: takeovers succeeded only on accounts without two-factor enabled, and the root cause, per Meta's counsel, was a separate code path that failed to verify the supplied email. The 20,225 figure and the April 17 to May 31 window come from Meta's breach filing with the Maine Attorney General.",
       "published": "2026-08-26",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.helpnetsecurity.com/2026/06/08/instagram-ai-support-vulnerability-account-takeovers/",
@@ -678,8 +730,10 @@
       "control": "An accuracy audit of the matching system before and during deployment, with false-positive rates measured by demographic group.",
       "verdict": "ADJUSTED",
       "verified_on": "2026-08-12",
+      "verification_note": "The discovery credit belongs to a July 2020 Reuters investigation. Rite Aid ended the program when presented with its findings, and the FTC complaint followed three years later.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.ftc.gov/news-events/news/press-releases/2023/12/rite-aid-banned-using-ai-facial-recognition-after-ftc-says-retailer-deployed-technology-without",
@@ -705,12 +759,14 @@
       "discovered_by": "advocate",
       "caught_by_deployer": false,
       "found": "Found by a consumer group",
-      "summary": "Facial recognition ran for refund-fraud prevention in 28 Australian stores for about two years before a consumer group's investigation triggered the privacy regulator. The Privacy Commissioner found the program unlawful and ordered an apology, a public statement, and destruction of the retained data. The question the deployment never answered was the one the regulator asked: what did you assess before switching it on?",
+      "summary": "Facial recognition ran for refund-fraud prevention in 28 Australian stores for about two years before a consumer group's investigation triggered the privacy regulator. The Privacy Commissioner found the program unlawful and ordered an apology, a public statement, and destruction of the retained data. The regulator asked what had been assessed before the system was switched on, and the deployment had no answer.",
       "control": "A privacy impact assessment and customer notice before biometric collection starts, reviewed by someone outside the team that wants the system.",
       "verdict": "ADJUSTED",
       "verified_on": "2026-08-12",
+      "verification_note": "Earlier reporting dated this to November 2024, conflating it with the separate Bunnings determination. The Kmart determination is dated September 18, 2025, and covers June 2020 to July 2022 in 28 stores.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://ia.acs.org.au/article/2025/kmart-facial-recognition-broke-privacy-laws--regulator-finds.html",
@@ -740,8 +796,10 @@
       "control": "A test that submits identical applications differing only in a protected attribute, run before the software screens a single applicant.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-12",
+      "verification_note": "The discovery detail is in the EEOC complaint: a rejected applicant resubmitted the identical application with a younger birth date and was offered an interview.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.eeoc.gov/newsroom/itutorgroup-pay-365000-settle-eeoc-discriminatory-hiring-suit",
@@ -766,12 +824,14 @@
       "discovered_by": "deployer-audit",
       "caught_by_deployer": true,
       "found": "Caught by its own quarterly financials",
-      "summary": "Zillow's home-buying unit relied on a valuation algorithm that overpaid through a shifting market. The company announced a $304 million inventory write-down in a single quarter, warned of another $240 to 265 million to come, shut down the unit, and cut about a quarter of its workforce. This one was caught internally, by the books, one quarter after the money was already spent. Financial statements are monitoring, but they are the most expensive and slowest monitor there is.",
+      "summary": "Zillow's home-buying unit relied on a valuation algorithm that overpaid through a shifting market. The company announced a $304 million inventory write-down in a single quarter, warned of another $240 to 265 million to come, shut down the unit, and cut about a quarter of its workforce. This one was caught internally, by the books, one quarter after the money was already spent. The financial statements were the monitor, and they are the slowest and most expensive one a company has.",
       "control": "Model error tracked against realized outcomes as they land, not discovered a quarter later in the inventory write-down.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-12",
+      "verification_note": "The $304 million write-down and the roughly 25 percent workforce reduction are Zillow's own figures. The widely quoted 2,000 jobs is press arithmetic on that percentage.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://investors.zillowgroup.com/investors/news-and-events/news/news-details/2021/Zillow-Group-Reports-Third-Quarter-2021-Financial-Results--Shares-Plan-to-Wind-Down-Zillow-Offers-Operations/default.aspx",
@@ -801,8 +861,10 @@
       "control": "A claim about what the system does is checked against the system before it goes into marketing.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-12",
+      "verification_note": "The SEC's release states the claims arose from an examination in which the firm admitted, in July 2021, that it had no such algorithm, and then kept advertising it.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.sec.gov/newsroom/press-releases/2024-36",
@@ -828,12 +890,14 @@
       "discovered_by": "regulator",
       "caught_by_deployer": false,
       "found": "Surfaced by SEC enforcement",
-      "summary": "The same SEC action charged a second adviser for marketing itself as the first regulated AI financial advisor, with AI-driven forecasts it could not support. It paid a $175,000 penalty. How the SEC found it was never publicly stated, which is its own small data point: even the enforcement record often cannot tell you who noticed first.",
-      "control": "A claim about what the system does is checked against the system before it goes into marketing.",
+      "summary": "The same SEC action charged a second adviser for marketing itself as the first regulated AI financial advisor, with AI-driven forecasts it could not support. It paid a $175,000 penalty. How the SEC found it was never publicly stated, which is worth noting on its own. Even the enforcement record often does not say who noticed first.",
+      "control": "A marketing claim about what an AI advisor does is reviewed against the system's actual operation before it is published, and reviewed again whenever the marketing changes.",
       "verdict": "ADJUSTED",
       "verified_on": "2026-08-12",
+      "verification_note": "How the SEC found the claims is not stated publicly. Earlier summaries said an SEC audit; the release does not say so, which is why this record says surfaced by enforcement rather than naming a mechanism.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.sec.gov/newsroom/press-releases/2024-36",
@@ -863,8 +927,10 @@
       "control": "Evidence that the AI exists and does what the pitch says, produced before any customer's money changes hands.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-12",
+      "verification_note": "The FTC does not name its tip-off source. The March 2025 action obtained a temporary restraining order, an asset freeze and a receiver, and the case settled in August 2025.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.ftc.gov/news-events/news/press-releases/2025/03/ftc-acts-stop-click-profit-online-business-opportunity-has-cost-consumers-least-14-million",
@@ -892,11 +958,13 @@
       "caught_by_deployer": false,
       "found": "Found by customer complaints and lawsuits",
       "summary": "An e-commerce scheme promised AI-powered repricing tools that would maximize storefront profits. The tools did not exist. Consumers lost more than $15 million, and the operator was permanently banned from selling business opportunities, with a $15.7 million judgment partially suspended for inability to pay. Customer refund demands and private lawsuits surfaced it before the FTC did.",
-      "control": "Evidence that the AI exists and does what the pitch says, produced before any customer's money changes hands.",
+      "control": "A product that claims to reprice with AI shows the reprice working in a live account before the first customer pays; a demo the vendor controls is not that evidence.",
       "verdict": "CONFIRMED",
       "verified_on": "2026-08-12",
+      "verification_note": "The July 2025 order imposed a permanent business-opportunity ban and a $15.7 million judgment that was partially suspended for inability to pay. That exact phrasing matters: the full amount was not collected.",
       "published": "2026-08-13",
-      "updated": "2026-09-01",
+      "updated": "2026-09-18",
+      "what_happened_next": [],
       "sources": [
         {
           "url": "https://www.ftc.gov/news-events/news/press-releases/2025/07/ftc-obtains-permanent-ban-e-commerce-business-opportunity-scheme-operator",
@@ -933,7 +1001,7 @@
       },
       "checked": "2026-08-25",
       "published": "2026-09-01",
-      "updated": null
+      "updated": "2026-09-06"
     },
     {
       "slug": "ai-broke-into-the-nsa",
@@ -947,14 +1015,14 @@
       ],
       "found": "No breach. At a June 11, 2026 hearing, Senator Mark Warner relayed that the NSA's director had told him Anthropic's Mythos model got into almost all of the agency's classified systems in hours. The context stripped from the viral version is that the NSA ran an authorized red-team exercise, using the model against its own networks. An internal test is not an intrusion, and no external AI breach of the NSA is on the record.",
       "verdict": "conflation",
-      "what_is_real": "What is real is more interesting than the rumor. A frontier model, pointed at hardened classified networks by the people who defend them, got through fast. That is a finding about the model, produced by a sanctioned test with the defenders watching. The receipts carry the other kind of case: a model that got out on its own, with someone else's systems as the victim. This entry first attributed the story to the July 2026 evaluation incidents on August 24 and was corrected on September 1 after tracing it to the June 11 hearing.",
+      "what_is_real": "What is real is more interesting than the rumor. A frontier model, pointed at hardened classified networks by the people who defend them, got through fast. That is a finding about the model, produced by a sanctioned test with the defenders watching. The receipts carry the other kind of case, a model that got out on its own with someone else's systems as the victim. This entry first attributed the story to the July 2026 evaluation incidents on August 24 and was corrected on September 1 after tracing it to the June 11 hearing.",
       "real": {
         "url": "https://san.com/cc/no-the-nsa-wasnt-hacked-by-ai-heres-what-actually-happened/",
         "label": "Straight Arrow News: No, the NSA wasn't hacked by AI. Here's what actually happened"
       },
       "checked": "2026-09-01",
       "published": "2026-09-01",
-      "updated": null
+      "updated": "2026-09-16"
     },
     {
       "slug": "eu-ai-office-first-fines-47-million",
@@ -976,7 +1044,7 @@
       },
       "checked": "2026-09-01",
       "published": "2026-09-01",
-      "updated": null
+      "updated": "2026-09-06"
     },
     {
       "slug": "openai-paused-astra-model",
@@ -996,7 +1064,7 @@
       },
       "checked": "2026-09-01",
       "published": "2026-09-01",
-      "updated": null
+      "updated": "2026-09-06"
     }
   ]
 }

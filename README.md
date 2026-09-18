@@ -8,7 +8,7 @@ organization running the AI caught it, the control that was missing, and the
 sources. A second table, `refuted`, holds AI failure stories that were checked
 at the source and not found there, with what was searched and what is real.
 
-**Version 2026.09.01. 26 incidents, 4 refuted claims.**
+**Version 2026.09.18. 26 incidents, 4 refuted claims.**
 
 The canonical, always-current copy is https://walkeraisystems.com/receipts.
 Every incident has its own page at `/receipts/<slug>`. This repository mirrors
@@ -23,7 +23,7 @@ the exact state it was drawn from.
 
 ## Cite as
 
-Walker AI Systems LLC (2026). The receipts: verified AI failures in production, version 2026.09.01. https://walkeraisystems.com/receipts
+Walker AI Systems LLC (2026). The receipts: verified AI failures in production, version 2026.09.18. https://walkeraisystems.com/receipts
 
 BibTeX is inside `receipts.json` under `bibtex`.
 
